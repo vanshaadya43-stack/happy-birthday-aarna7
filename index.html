@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Aarna 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ---------------- GLOBAL ---------------- */
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffb3d9, #c77dff);
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+section {
+    padding: 70px 20px;
+    display: none;
+}
+
+section.active {
+    display: block;
+}
+
+h1 {
+    font-size: 3rem;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px white; }
+    to { text-shadow: 0 0 30px #ff4d9d; }
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    background: white;
+    color: #ff4d9d;
+    margin-top: 20px;
+}
+
+/* ---------------- FLOATING HEARTS ---------------- */
+.heart {
+    position: fixed;
+    bottom: 0;
+    font-size: 20px;
+    animation: floatUp 6s linear forwards;
+    opacity: 0.8;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+}
+
+/* ---------------- MUSIC ---------------- */
+.music-btn {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+}
+
+/* ---------------- GALLERY ---------------- */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.4s, box-shadow 0.4s;
+}
+
+.gallery img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* ---------------- LIGHTBOX ---------------- */
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+}
+
+.lightbox img {
+    max-width: 80%;
+    border-radius: 20px;
+}
+
+/* ---------------- GAME ---------------- */
+#gameBox {
+    position: relative;
+    height: 300px;
+    border: 2px dashed white;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.falling {
+    position: absolute;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* ---------------- FINAL MESSAGE ---------------- */
+#loveMessage {
+    font-size: 1.3rem;
+    max-width: 600px;
+    margin: auto;
+    animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ---------------- FOOTER ---------------- */
+footer {
+    padding: 30px;
+    font-size: 1.1rem;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<button class="music-btn" onclick="toggleMusic()">🎵 Play / Pause</button>
+<audio id="music" loop>
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- HERO -->
+<section id="hero" class="active">
+    <h1>🎂 Happy 15th Birthday, Aarna Aadya 💖</h1>
+    <p>
+        To the girl who makes my world brighter ✨  
+        May your life be filled with love, happiness, smiles, and magical memories 💕
+    </p>
+    <button onclick="startJourney()">Start Our Journey 💕</button>
+</section>
+
+<!-- PHOTOS -->
+<section id="photos">
+    <h2>📸 Our Journey Together 💖</h2>
+    <div class="gallery">
+        <img src="img1.jpg" onclick="openLightbox(this.src)">
+        <img src="img2.jpg" onclick="openLightbox(this.src)">
+        <img src="img3.jpg" onclick="openLightbox(this.src)">
+        <img src="img4.jpg" onclick="openLightbox(this.src)">
+        <img src="img5.jpg" onclick="openLightbox(this.src)">
+        <img src="img6.jpg" onclick="openLightbox(this.src)">
+        <img src="img7.jpg" onclick="openLightbox(this.src)">
+        <img src="img8.jpg" onclick="openLightbox(this.src)">
+        <img src="img9.jpg" onclick="openLightbox(this.src)">
+        <img src="img10.jpg" onclick="openLightbox(this.src)">
+    </div>
+    <button onclick="goToGame()">Play a Game With Me 🎮💖</button>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightboxImg">
+</div>
+
+<!-- GAME -->
+<section id="game">
+    <h2>💗 Catch the Hearts 💗</h2>
+    <p>Catch 10 hearts to unlock your surprise 💕</p>
+    <p id="score">Score: 0</p>
+    <div id="gameBox"></div>
+</section>
+
+<!-- FINAL MESSAGE -->
+<section id="final">
+    <h2>💌 For You, My Love 💌</h2>
+    <p id="loveMessage">
+        Aarna,  
+        You are the most special person in my life 💖  
+        Every smile of yours means everything to me.  
+        I’m so grateful to walk this journey with you and I never want to loose you and I want to spend my whole life with you every moment of it enjoying it with you I know right now we are not together physically but in future I promise that I will also be there I can't have ever imagined of having a super caring person like you I LOVEEEEEE YOUUUUU SOOOOO SOOOOOO MUCHHHHH MY LOVE❤️ 
+        Happy 15th Birthday, my love ✨  
+        You win my heart forever 💕
+    </p>
+</section>
+
+<footer>
+    Made with ❤️ just for Aarna Aadya
+</footer>
+
+<script>
+/* ---------- FLOATING HEARTS ---------- */
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}, 600);
+
+/* ---------- MUSIC ---------- */
+const music = document.getElementById("music");
+function toggleMusic() {
+    music.paused ? music.play() : music.pause();
+}
+
+/* ---------- NAVIGATION ---------- */
+function startJourney() {
+    document.getElementById("hero").classList.remove("active");
+    document.getElementById("photos").classList.add("active");
+    music.play();
+}
+
+function goToGame() {
+    document.getElementById("photos").classList.remove("active");
+    document.getElementById("game").classList.add("active");
+}
+
+/* ---------- LIGHTBOX ---------- */
+function openLightbox(src) {
+    document.getElementById("lightbox").style.display = "flex";
+    document.getElementById("lightboxImg").src = src;
+}
+function closeLightbox() {
+    document.getElementById("lightbox").style.display = "none";
+}
+
+/* ---------- GAME LOGIC ---------- */
+let score = 0;
+const gameBox = document.getElementById("gameBox");
+
+function createHeart() {
+    const h = document.createElement("div");
+    h.className = "falling";
+    h.innerHTML = "💗";
+    h.style.left = Math.random() * 90 + "%";
+    h.style.top = "-30px";
+    gameBox.appendChild(h);
+
+    const fall = setInterval(() => {
+        h.style.top = h.offsetTop + 5 + "px";
+        if (h.offsetTop > 300) {
+            clearInterval(fall);
+            h.remove();
+        }
+    }, 50);
+
+    h.onclick = () => {
+        score++;
+        document.getElementById("score").innerText = "Score: " + score;
+        h.remove();
+        clearInterval(fall);
+
+        if (score >= 10) {
+            document.getElementById("game").classList.remove("active");
+            document.getElementById("final").classList.add("active");
+        }
+    };
+}
+
+setInterval(() => {
+    if (document.getElementById("game").classList.contains("active")) {
+        createHeart();
+    }
+}, 800);
+</script>
+
+</body>
+</html>
